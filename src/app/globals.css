@@ -1,0 +1,330 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Nunito:wght@600;700;800;900;1000&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  background: none;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+html, body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #0a0e19;
+  font-family: 'Be Vietnam Pro', 'Nunito', system-ui, -apple-system, sans-serif;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* Main Container & Canvas Layout */
+.game-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #7dd3fc;
+}
+
+.canvas-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Custom Cartoon Game Buttons */
+.btn-cartoon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%);
+  border: 4px solid #78350f;
+  border-radius: 20px;
+  color: #ffffff;
+  font-family: inherit;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 6px 0 #78350f, 0 12px 20px rgba(0,0,0,0.35);
+  transition: all 0.1s ease;
+  cursor: pointer;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  padding: 14px 28px;
+  font-size: 1.25rem;
+}
+
+.btn-cartoon:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 #78350f, 0 15px 25px rgba(0,0,0,0.4);
+  background: linear-gradient(180deg, #fbbf24 0%, #d97706 100%);
+}
+
+.btn-cartoon:active {
+  transform: translateY(3px);
+  box-shadow: 0 3px 0 #78350f, 0 6px 10px rgba(0,0,0,0.3);
+}
+
+.btn-green {
+  background: linear-gradient(180deg, #10b981 0%, #059669 100%);
+  border-color: #064e3b;
+  box-shadow: 0 6px 0 #064e3b, 0 12px 20px rgba(0,0,0,0.35);
+}
+.btn-green:hover {
+  background: linear-gradient(180deg, #34d399 0%, #059669 100%);
+  box-shadow: 0 8px 0 #064e3b, 0 15px 25px rgba(0,0,0,0.4);
+}
+.btn-green:active {
+  box-shadow: 0 3px 0 #064e3b, 0 6px 10px rgba(0,0,0,0.3);
+}
+
+.btn-red {
+  background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%);
+  border-color: #7f1d1d;
+  box-shadow: 0 6px 0 #7f1d1d, 0 12px 20px rgba(0,0,0,0.35);
+}
+.btn-red:hover {
+  background: linear-gradient(180deg, #f87171 0%, #dc2626 100%);
+  box-shadow: 0 8px 0 #7f1d1d, 0 15px 25px rgba(0,0,0,0.4);
+}
+.btn-red:active {
+  box-shadow: 0 3px 0 #7f1d1d, 0 6px 10px rgba(0,0,0,0.3);
+}
+
+/* Wood Plaque Card */
+.wood-card {
+  background: linear-gradient(145deg, #a16207 0%, #78350f 100%);
+  border: 5px solid #451a03;
+  border-radius: 24px;
+  box-shadow: 0 10px 0 #451a03, 0 20px 30px rgba(0,0,0,0.6);
+  padding: 24px 28px;
+  color: #fff;
+  width: 100%;
+  max-width: 520px;
+}
+
+/* HUD System */
+.hud-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 24px;
+}
+
+.hud-row-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.hud-row-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.hud-badge {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 18px;
+  padding: 8px 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #ffffff;
+  pointer-events: auto;
+  width: fit-content;
+}
+
+.hud-btn {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 14px;
+  padding: 10px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #ffffff;
+  pointer-events: auto;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.hud-btn:hover {
+  background: rgba(30, 41, 59, 0.95);
+  border-color: #fbbf24;
+}
+
+/* Timer Bar */
+.timer-bar-wrap {
+  width: 200px;
+  height: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+  margin-top: 8px;
+  overflow: hidden;
+  padding: 2px;
+}
+
+.timer-bar-fill {
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #f59e0b 0%, #22c55e 100%);
+  transition: width 0.25s linear;
+}
+
+.timer-bar-fill.tension {
+  background: #ef4444;
+}
+
+/* Ammo Bar */
+.ammo-badge {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 18px;
+  padding: 10px 18px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: border-color 0.15s;
+}
+
+.ammo-badge:hover {
+  border-color: #f59e0b;
+}
+
+.ammo-shells-row {
+  display: flex;
+  gap: 6px;
+  align-items: flex-end;
+}
+
+.ammo-shell-graphic {
+  width: 18px;
+  height: 44px;
+  border-radius: 4px 4px 2px 2px;
+  border: 1px solid #78350f;
+  background: linear-gradient(180deg, #dc2626 0%, #b91c1c 70%, #facc15 70%, #eab308 100%);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+  transform: translateY(-4px);
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.ammo-shell-graphic.spent {
+  background: #334155;
+  border-color: #1e293b;
+  opacity: 0.35;
+  transform: translateY(0);
+}
+
+/* Modals & Backdrops */
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  pointer-events: auto !important;
+  cursor: default !important;
+}
+
+.modal-overlay button,
+.modal-overlay a,
+.modal-overlay [role="button"] {
+  cursor: pointer !important;
+}
+
+/* Menu Layout */
+.menu-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  pointer-events: none;
+}
+
+.menu-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: auto 0;
+  pointer-events: auto;
+}
+
+/* Animations */
+@keyframes hitMarkerPulse {
+  0% { transform: translate(-50%, -50%) scale(1.4); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1.0); opacity: 0; }
+}
+
+.hit-marker-anim {
+  animation: hitMarkerPulse 0.16s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+}
+
+@keyframes floatScoreUp {
+  0% { opacity: 0; transform: translate(-50%, 0) scale(0.6); }
+  25% { opacity: 1; transform: translate(-50%, -20px) scale(1.2); }
+  100% { opacity: 0; transform: translate(-50%, -80px) scale(0.9); }
+}
+
+.float-score-anim {
+  animation: floatScoreUp 0.85s cubic-bezier(0.15, 0.85, 0.35, 1.2) forwards;
+}
+
+@keyframes pulseTension {
+  0%, 100% { transform: scale(1); color: #ef4444; }
+  50% { transform: scale(1.1); color: #facc15; }
+}
+
+.pulse-tension {
+  animation: pulseTension 0.45s ease-in-out infinite;
+}
+
+@keyframes bannerDrop {
+  0% { transform: translate(-50%, -80px) scale(0.8); opacity: 0; }
+  25% { transform: translate(-50%, 0px) scale(1.05); opacity: 1; }
+  35% { transform: translate(-50%, 0px) scale(1.0); }
+  85% { transform: translate(-50%, 0px) scale(1.0); opacity: 1; }
+  100% { transform: translate(-50%, -40px) scale(0.85); opacity: 0; }
+}
+
+.banner-anim {
+  animation: bannerDrop 3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}

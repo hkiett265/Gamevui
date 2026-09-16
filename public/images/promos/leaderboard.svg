@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 240" width="600" height="240">
+  <defs>
+    <linearGradient id="bgGrad3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#091328"/>
+      <stop offset="60%" stop-color="#0c234a"/>
+      <stop offset="100%" stop-color="#143468"/>
+    </linearGradient>
+    <radialGradient id="goldCrownGlow" cx="0.2" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#091328" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="crownGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="40%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="podium1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1e40af"/>
+    </linearGradient>
+    <linearGradient id="podium2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="podium3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ea580c"/>
+      <stop offset="100%" stop-color="#9a3412"/>
+    </linearGradient>
+    <filter id="crownGlowFilt" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#f59e0b" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="240" rx="16" fill="url(#bgGrad3)"/>
+  <rect width="600" height="240" fill="url(#goldCrownGlow)"/>
+
+  <!-- Golden Crown on Left -->
+  <g transform="translate(60, 50)" filter="url(#crownGlowFilt)">
+    <polygon points="10,80 30,10 65,50 100,10 120,80" fill="url(#crownGrad)"/>
+    <!-- Crown Base -->
+    <rect x="5" y="75" width="120" height="20" rx="5" fill="#b45309"/>
+    <rect x="10" y="78" width="110" height="14" rx="3" fill="#facc15"/>
+    <!-- Jewels on Points -->
+    <circle cx="30" cy="10" r="7" fill="#ef4444"/>
+    <circle cx="65" cy="50" r="6" fill="#38bdf8"/>
+    <circle cx="100" cy="10" r="7" fill="#ef4444"/>
+    <!-- Jewels on Base -->
+    <circle cx="35" cy="85" r="4" fill="#ef4444"/>
+    <circle cx="65" cy="85" r="5" fill="#38bdf8"/>
+    <circle cx="95" cy="85" r="4" fill="#ef4444"/>
+  </g>
+
+  <!-- 3D Podium 1 - 2 - 3 on Right -->
+  <g transform="translate(380, 85)">
+    <!-- Rank 2 Podium (Left) -->
+    <g transform="translate(0, 35)">
+      <polygon points="0,20 20,0 70,0 50,20" fill="#60a5fa"/>
+      <rect x="0" y="20" width="50" height="75" fill="url(#podium2)"/>
+      <polygon points="50,20 70,0 70,75 50,95" fill="#1e3a8a"/>
+      <!-- Number 2 -->
+      <text x="25" y="65" font-family="'Fredoka', 'Outfit', sans-serif" font-weight="900" font-size="34" fill="#ffffff" text-anchor="middle">2</text>
+    </g>
+
+    <!-- Rank 1 Podium (Center - Tallest) -->
+    <g transform="translate(55, 0)">
+      <polygon points="0,20 25,0 85,0 60,20" fill="#93c5fd"/>
+      <rect x="0" y="20" width="60" height="110" fill="url(#podium1)"/>
+      <polygon points="60,20 85,0 85,110 60,130" fill="#172554"/>
+      <!-- Number 1 -->
+      <text x="30" y="75" font-family="'Fredoka', 'Outfit', sans-serif" font-weight="900" font-size="44" fill="#facc15" text-anchor="middle">1</text>
+      <!-- Tiny Gold Star -->
+      <polygon points="30,30 32,36 38,36 33,40 35,46 30,42 25,46 27,40 22,36 28,36" fill="#facc15"/>
+    </g>
+
+    <!-- Rank 3 Podium (Right) -->
+    <g transform="translate(120, 55)">
+      <polygon points="0,20 20,0 70,0 50,20" fill="#fb923c"/>
+      <rect x="0" y="20" width="50" height="55" fill="url(#podium3)"/>
+      <polygon points="50,20 70,0 70,55 50,75" fill="#7c2d12"/>
+      <!-- Number 3 -->
+      <text x="25" y="58" font-family="'Fredoka', 'Outfit', sans-serif" font-weight="900" font-size="32" fill="#ffffff" text-anchor="middle">3</text>
+    </g>
+  </g>
+</svg>

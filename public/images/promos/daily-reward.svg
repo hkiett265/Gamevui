@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 240" width="600" height="240">
+  <defs>
+    <linearGradient id="bgGrad1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e1035"/>
+      <stop offset="60%" stop-color="#2d124d"/>
+      <stop offset="100%" stop-color="#4a154b"/>
+    </linearGradient>
+    <radialGradient id="goldGlow" cx="0.25" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.6"/>
+      <stop offset="60%" stop-color="#d97706" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#1e1035" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="goldCup" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="30%" stop-color="#facc15"/>
+      <stop offset="70%" stop-color="#eab308"/>
+      <stop offset="100%" stop-color="#ca8a04"/>
+    </linearGradient>
+    <linearGradient id="giftBox1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#818cf8"/>
+      <stop offset="100%" stop-color="#4338ca"/>
+    </linearGradient>
+    <linearGradient id="giftRibbon1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f472b6"/>
+      <stop offset="100%" stop-color="#db2777"/>
+    </linearGradient>
+    <linearGradient id="giftBox2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fb923c"/>
+      <stop offset="100%" stop-color="#ea580c"/>
+    </linearGradient>
+    <linearGradient id="giftRibbon2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="100%" stop-color="#eab308"/>
+    </linearGradient>
+    <filter id="glowDrop" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="240" rx="16" fill="url(#bgGrad1)"/>
+  <rect width="600" height="240" fill="url(#goldGlow)"/>
+
+  <!-- Sparkles -->
+  <circle cx="80" cy="40" r="3" fill="#fde047" opacity="0.8"/>
+  <circle cx="280" cy="30" r="2" fill="#f472b6" opacity="0.7"/>
+  <circle cx="220" cy="180" r="4" fill="#67e8f9" opacity="0.6"/>
+  <circle cx="340" cy="190" r="3" fill="#fde047" opacity="0.9"/>
+  <polygon points="120,70 123,78 131,81 123,84 120,92 117,84 109,81 117,78" fill="#fde047"/>
+  <polygon points="490,45 492,51 498,53 492,55 490,61 488,55 482,53 488,51" fill="#f472b6"/>
+
+  <!-- Left Illustration: Golden Trophy -->
+  <g transform="translate(60, 40)" filter="url(#glowDrop)">
+    <!-- Base -->
+    <polygon points="40,140 100,140 110,155 30,155" fill="#ca8a04"/>
+    <rect x="55" y="115" width="30" height="25" rx="3" fill="#eab308"/>
+    <!-- Handles -->
+    <path d="M45 55 C15 55 15 90 45 95" fill="none" stroke="#facc15" stroke-width="8" stroke-linecap="round"/>
+    <path d="M95 55 C125 55 125 90 95 95" fill="none" stroke="#facc15" stroke-width="8" stroke-linecap="round"/>
+    <!-- Cup Body -->
+    <path d="M40 40 L100 40 C100 80 85 115 70 115 C55 115 40 80 40 40 Z" fill="url(#goldCup)"/>
+    <!-- Star on Cup -->
+    <polygon points="70,60 74,70 84,70 76,77 79,87 70,81 61,87 64,77 56,70 66,70" fill="#ffffff" opacity="0.9"/>
+    <!-- Rim Top -->
+    <ellipse cx="70" cy="40" rx="30" ry="7" fill="#fef08a"/>
+  </g>
+
+  <!-- Right Side: 3D Gift Boxes -->
+  <g transform="translate(380, 50)" filter="url(#glowDrop)">
+    <!-- Big Blue/Purple Gift Box -->
+    <g transform="translate(60, 40)">
+      <rect x="0" y="30" width="110" height="95" rx="8" fill="url(#giftBox1)"/>
+      <!-- Lid -->
+      <rect x="-8" y="18" width="126" height="22" rx="5" fill="#6366f1"/>
+      <!-- Vertical Ribbon -->
+      <rect x="42" y="18" width="26" height="107" fill="url(#giftRibbon1)"/>
+      <!-- Horizontal Ribbon -->
+      <rect x="0" y="65" width="110" height="22" fill="url(#giftRibbon1)"/>
+      <!-- Bow -->
+      <path d="M40 18 C15 -5 30 -20 55 18 C80 -20 95 -5 70 18" fill="url(#giftRibbon1)"/>
+      <ellipse cx="55" cy="18" rx="10" ry="8" fill="#f43f5e"/>
+    </g>
+
+    <!-- Smaller Orange/Gold Gift Box in Front -->
+    <g transform="translate(10, 85)">
+      <rect x="0" y="20" width="75" height="65" rx="6" fill="url(#giftBox2)"/>
+      <rect x="-5" y="10" width="85" height="16" rx="4" fill="#f97316"/>
+      <rect x="28" y="10" width="18" height="75" fill="url(#giftRibbon2)"/>
+      <rect x="0" y="45" width="75" height="16" fill="url(#giftRibbon2)"/>
+      <!-- Bow -->
+      <path d="M28 10 C10 -5 20 -15 37 10 C54 -15 64 -5 46 10" fill="url(#giftRibbon2)"/>
+      <circle cx="37" cy="10" r="6" fill="#fde047"/>
+    </g>
+  </g>
+</svg>
