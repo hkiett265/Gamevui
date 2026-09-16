@@ -5,7 +5,10 @@ import { useOceanFishStore } from '@/stores/useOceanFishStore';
 import { RotateCcw, Home, Trophy, Coins, Award, Zap, Crosshair } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
+import { useAuthStore } from '@/stores/useAuthStore';
+
 export const OceanGameOverModal: React.FC = () => {
+  const user = useAuthStore((s) => s.user);
   const {
     gameState,
     score,
@@ -31,7 +34,7 @@ export const OceanGameOverModal: React.FC = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           gameSlug: 'ban-ca-dai-duong',
-          playerName: 'Xạ Thủ Đại Dương',
+          playerName: user?.username || 'Xạ Thủ Đại Dương',
           score,
           combo: maxCombo
         })
