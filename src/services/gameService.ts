@@ -13,6 +13,11 @@ export class GameService {
   }
 
   public static async fetchGamesFromApi(): Promise<Game[]> {
+    // Avoid refetching if already initialized in client session
+    if (this.isInitialized) {
+      return this.games;
+    }
+
     try {
       const res = await fetch('/api/games');
       const data = await res.json();
@@ -23,6 +28,7 @@ export class GameService {
     } catch (err) {
       console.warn('Could not fetch games from API, using cached data:', err);
     }
+    this.isInitialized = true;
     return this.games;
   }
 

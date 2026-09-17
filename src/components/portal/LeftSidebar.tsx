@@ -37,17 +37,21 @@ const ICON_MAP: Record<string, React.ReactNode> = {
   Sparkle: <Sparkle size={18} color="#22c55e" />
 };
 
+let cachedCategories: any = null;
+
 export const LeftSidebar: React.FC<LeftSidebarProps> = ({
   selectedCategoryId,
   onSelectCategory
 }) => {
-  const [categories, setCategories] = React.useState(CATEGORIES);
+  const [categories, setCategories] = React.useState(() => cachedCategories || CATEGORIES);
 
   React.useEffect(() => {
+    if (cachedCategories) return;
     fetch('/api/categories')
       .then((res) => res.json())
       .then((data) => {
         if (data.success && Array.isArray(data.categories) && data.categories.length > 0) {
+          cachedCategories = data.categories;
           setCategories(data.categories);
         }
       })
@@ -57,7 +61,7 @@ export const LeftSidebar: React.FC<LeftSidebarProps> = ({
   return (
     <aside className="portal-left-sidebar">
       <ul className="sidebar-category-list">
-        {categories.map((cat) => {
+        {categories.map((cat: any) => {
           const isActive = selectedCategoryId === cat.id;
           return (
             <li key={cat.id}>

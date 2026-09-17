@@ -1,8 +1,17 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { prisma, isDatabaseAvailable } from '@/lib/prisma';
 import { PROMO_BANNERS } from '@/data/promos';
 
 export async function GET() {
+  const dbUp = await isDatabaseAvailable();
+  if (!dbUp) {
+    return NextResponse.json({
+      success: true,
+      source: 'static_offline',
+      promos: PROMO_BANNERS
+    });
+  }
+
   try {
     const dbPromos = await prisma.promoBanner.findMany({
       orderBy: { sortOrder: 'asc' }

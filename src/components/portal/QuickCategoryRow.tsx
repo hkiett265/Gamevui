@@ -30,17 +30,21 @@ const QUICK_ICON_MAP: Record<string, (color: string) => React.ReactNode> = {
   Dices: (color) => <Dices size={24} color={color} />
 };
 
+let cachedQuickCategories: any = null;
+
 export const QuickCategoryRow: React.FC<QuickCategoryRowProps> = ({
   onSelectQuickFilter
 }) => {
   const router = useRouter();
-  const [items, setItems] = React.useState(QUICK_CATEGORIES);
+  const [items, setItems] = React.useState(() => cachedQuickCategories || QUICK_CATEGORIES);
 
   React.useEffect(() => {
+    if (cachedQuickCategories) return;
     fetch('/api/categories')
       .then((res) => res.json())
       .then((data) => {
         if (data.success && Array.isArray(data.quickCategories) && data.quickCategories.length > 0) {
+          cachedQuickCategories = data.quickCategories;
           setItems(data.quickCategories);
         }
       })
@@ -63,7 +67,7 @@ export const QuickCategoryRow: React.FC<QuickCategoryRowProps> = ({
 
   return (
     <div className="quick-categories-row">
-      {items.map((item) => (
+      {items.map((item: any) => (
         <button
           key={item.id}
           className="quick-cat-card"

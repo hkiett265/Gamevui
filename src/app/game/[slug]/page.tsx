@@ -72,7 +72,7 @@ export default function GameDetailPage() {
 
       <main className="game-detail-container">
         {/* BACK NAVIGATION LINK */}
-        <Link href="/" className="game-detail-back-link">
+        <Link href="/" className="game-detail-back-link" prefetch={true}>
           <ArrowLeft size={18} />
           <span>Quay lại Trang chủ</span>
         </Link>
@@ -137,7 +137,7 @@ export default function GameDetailPage() {
                   <span>{copied ? 'Đã copy link!' : 'Chia sẻ'}</span>
                 </button>
 
-                <Link href={`/play/${game.slug}`} className="hero-btn-play">
+                <Link href={`/play/${game.slug}`} className="hero-btn-play" prefetch={true}>
                   <Gamepad2 size={22} />
                   <span>CHƠI NGAY</span>
                 </Link>
