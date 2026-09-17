@@ -1,10 +1,10 @@
-'use client';
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { X, User, Lock, Mail, Eye, EyeOff, Sparkles, LogIn, UserPlus } from 'lucide-react';
 
 export const AuthModal: React.FC = () => {
+  const [mounted, setMounted] = useState(false);
   const {
     isAuthModalOpen,
     authMode,
@@ -13,6 +13,10 @@ export const AuthModal: React.FC = () => {
     login,
     register
   } = useAuthStore();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Form states
   const [identifier, setIdentifier] = useState(''); // username or email for login
@@ -25,7 +29,7 @@ export const AuthModal: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  if (!isAuthModalOpen) return null;
+  if (!isAuthModalOpen || !mounted) return null;
 
   const handleSwitchMode = (mode: 'login' | 'register') => {
     setAuthMode(mode);
@@ -79,20 +83,19 @@ export const AuthModal: React.FC = () => {
     }
   };
 
-  return (
+  return createPortal(
     <div
-      className="modal-overlay"
       onClick={closeAuthModal}
       style={{
         position: 'fixed',
         inset: 0,
-        zIndex: 100,
+        zIndex: 99999,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         padding: '16px',
-        background: 'rgba(2, 6, 23, 0.8)',
-        backdropFilter: 'blur(8px)',
+        background: 'rgba(2, 6, 23, 0.82)',
+        backdropFilter: 'blur(10px)',
         cursor: 'default',
         pointerEvents: 'auto'
       }}
@@ -490,6 +493,7 @@ export const AuthModal: React.FC = () => {
           </form>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };

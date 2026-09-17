@@ -5,14 +5,18 @@ import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import { PROMO_BANNERS } from '@/data/promos';
 
+let cachedPromos: any = null;
+
 export const PromoBanners: React.FC = () => {
-  const [banners, setBanners] = React.useState(PROMO_BANNERS);
+  const [banners, setBanners] = React.useState(() => cachedPromos || PROMO_BANNERS);
 
   React.useEffect(() => {
+    if (cachedPromos) return;
     fetch('/api/promos')
       .then((res) => res.json())
       .then((data) => {
         if (data.success && Array.isArray(data.promos) && data.promos.length > 0) {
+          cachedPromos = data.promos;
           setBanners(data.promos);
         }
       })
@@ -21,7 +25,7 @@ export const PromoBanners: React.FC = () => {
 
   return (
     <div className="promo-banners-grid">
-      {banners.map((banner) => (
+      {banners.map((banner: any) => (
         <div key={banner.id} className="promo-banner-card">
           {/* Background Illustration */}
           <Image

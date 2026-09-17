@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { prisma, isDatabaseAvailable } from '@/lib/prisma';
 import { verifySessionToken } from '@/lib/auth';
 
 export async function GET(request: NextRequest) {
@@ -14,7 +14,21 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ success: false, user: null }, { status: 200 });
     }
 
-    // Fetch fresh user data from MySQL
+    const dbUp = await isDatabaseAvailable();
+    if (!dbUp) {
+      return NextResponse.json({
+        success: true,
+        user: {
+          id: payload.userId,
+          username: payload.username || 'Game thủ',
+          email: payload.email || '',
+          avatar: null,
+          role: 'USER',
+          createdAt: new Date().toISOString()
+        }
+      });
+    }
+
     const user = await prisma.user.findUnique({
       where: { id: payload.userId },
       select: {
@@ -37,6 +51,6 @@ export async function GET(request: NextRequest) {
     });
   } catch (error) {
     console.error('Error in /api/auth/me:', error);
-    return NextResponse.json({ success: false, user: null }, { status: 500 });
+    return NextResponse.json({ success: false, user: null }, { status: 200 });
   }
 }

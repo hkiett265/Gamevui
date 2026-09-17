@@ -6,15 +6,19 @@ import Link from 'next/link';
 import { ChevronLeft, ChevronRight, Flame, Gamepad2 } from 'lucide-react';
 import { HERO_SLIDES } from '@/data/games';
 
+let cachedSlides: any = null;
+
 export const HeroCarousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [slides, setSlides] = useState(HERO_SLIDES);
+  const [slides, setSlides] = useState(() => cachedSlides || HERO_SLIDES);
 
   useEffect(() => {
+    if (cachedSlides) return;
     fetch('/api/hero-slides')
       .then((res) => res.json())
       .then((data) => {
         if (data.success && Array.isArray(data.slides) && data.slides.length > 0) {
+          cachedSlides = data.slides;
           setSlides(data.slides);
         }
       })
@@ -39,7 +43,7 @@ export const HeroCarousel: React.FC = () => {
 
   return (
     <div className="hero-carousel-wrapper">
-      {slides.map((slide, index) => {
+      {slides.map((slide: any, index: number) => {
         const isActive = index === currentIndex;
         return (
           <div
@@ -78,6 +82,7 @@ export const HeroCarousel: React.FC = () => {
                   <Link
                     href={`/play/${slide.gameSlug}`}
                     className="hero-btn-play"
+                    prefetch={true}
                   >
                     <Gamepad2 size={20} />
                     <span>{slide.ctaText}</span>
@@ -86,6 +91,7 @@ export const HeroCarousel: React.FC = () => {
                   <Link
                     href={`/game/${slide.gameSlug}`}
                     className="hero-btn-details"
+                    prefetch={true}
                   >
                     <span>{slide.secondaryCtaText}</span>
                   </Link>
@@ -96,7 +102,7 @@ export const HeroCarousel: React.FC = () => {
             {/* Wooden Farm Sign (Right Side) */}
             {slide.woodenSignLines && slide.woodenSignLines.length > 0 && (
               <div className="hero-wooden-sign">
-                {slide.woodenSignLines.map((line, idx) => (
+                {slide.woodenSignLines.map((line: any, idx: number) => (
                   <div key={idx} className="wooden-line">
                     {line}
                   </div>
@@ -125,7 +131,7 @@ export const HeroCarousel: React.FC = () => {
 
       {/* Pagination Dots */}
       <div className="hero-pagination-dots">
-        {slides.map((_, idx) => (
+        {slides.map((_: any, idx: number) => (
           <button
             key={idx}
             className={`hero-dot ${idx === currentIndex ? 'active' : ''}`}

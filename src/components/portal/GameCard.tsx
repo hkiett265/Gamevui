@@ -35,7 +35,7 @@ export const GameCard: React.FC<GameCardProps> = ({
   };
 
   return (
-    <Link href={`/game/${game.slug}`} className="game-card">
+    <Link href={`/game/${game.slug}`} className="game-card" prefetch={true}>
       <div className="game-thumb-box">
         {/* THUMBNAIL IMAGE */}
         <Image

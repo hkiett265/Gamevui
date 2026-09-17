@@ -2,6 +2,23 @@ import { Game, HeroSlide } from '@/types/game';
 
 export const HERO_SLIDES: HeroSlide[] = [
   {
+    id: 'jet-jet-mien-tay-3d',
+    gameSlug: 'jet-jet-mien-tay-3d',
+    title: 'JET JET MIỀN TÂY 3D',
+    subtitle: 'HÀNH TRÌNH BIẾN HÌNH',
+    tagline: 'Uống một chai - Đổi cả phong cách - Lướt cùng Exciter!',
+    badge: 'GAME 3D MỚI NHẤT',
+    image: '/images/banners/jet-jet-mien-tay-hero.jpg',
+    ctaText: 'Chơi ngay',
+    secondaryCtaText: 'Xem chi tiết',
+    woodenSignLines: [
+      'LÊN XE EXCITER',
+      'GHÉ TẠP HÓA',
+      'UỐNG NƯỚC TĂNG LỰC',
+      'JET JET MODE!'
+    ]
+  },
+  {
     id: 'chicken-mayhem-3d',
     gameSlug: 'ban-ga-3d',
     title: 'BẮN GÀ 3D',
@@ -55,6 +72,29 @@ export const HERO_SLIDES: HeroSlide[] = [
 ];
 
 export const GAMES: Game[] = [
+  {
+    id: 'jet-jet-mien-tay-3d',
+    slug: 'jet-jet-mien-tay-3d',
+    title: 'Jet Jet Miền Tây 3D',
+    subtitle: 'Hành Trình Biến Hình',
+    description: 'Game 3D thế giới mở thu nhỏ đậm chất làng quê miền Tây Việt Nam! Bạn tự do điều khiển nhân vật, lên xe côn tay Exciter lượn qua cầu cong, kênh rạch rợp bóng dừa; ghé tiệm Tạp Hóa Cô Ba mua chai nước tăng lực đỏ, uống nước kích hoạt cinematic biến hình sang trang phục denim streetwear đỉnh chóp cùng chế độ JET JET MODE bứt tốc!',
+    instructions: 'Đi bộ: WASD di chuyển, Shift chạy nhanh. Lên / Xuống xe: Bấm F. Lái xe: W tăng tốc, S phanh / lùi nhẹ, A/D bẻ lái và nghiêng xe, Shift kích hoạt Nitro Jet. Tương tác: Bấm E khi đến gần tiệm tạp hóa hoặc đồ vật.',
+    thumbnail: '/images/games/jet-jet-mien-tay-3d.jpg',
+    banner: '/images/banners/jet-jet-mien-tay-hero.jpg',
+    category: 'Đua xe / Phiêu lưu',
+    categoryId: 'racing',
+    tags: ['3D', 'Lái xe', 'Miền Tây', 'Phiêu lưu', 'Mới', 'Hot', 'vietnam'],
+    badge: 'NEW',
+    isHot: true,
+    isNew: true,
+    isFeatured: true,
+    available: true,
+    gameUrl: '/play/jet-jet-mien-tay-3d',
+    rating: 5.0,
+    playCount: '1.2K',
+    releaseDate: '2025',
+    developer: 'Hồ Kiệt Studio'
+  },
   {
     id: 'chicken-mayhem',
     slug: 'ban-ga-3d',
@@ -296,19 +336,3 @@ export const GAMES: Game[] = [
     developer: 'Hồ Kiệt Studio'
   }
 ];
-
-export function getFeaturedGames(): Game[] {
-  return GAMES.filter(g => g.isFeatured);
-}
-
-export function getNewGames(): Game[] {
-  return GAMES.filter(g => g.isNew);
-}
-
-export function getHotGames(): Game[] {
-  return GAMES.filter(g => g.isHot);
-}
-
-export function getGameBySlug(slug: string): Game | undefined {
-  return GAMES.find(g => g.slug === slug);
-}

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { prisma, isDatabaseAvailable } from '@/lib/prisma';
 import { GAMES } from '@/data/games';
 import { Game } from '@/types/game';
 
@@ -42,6 +42,45 @@ export async function GET(request: NextRequest) {
   const categoryId = searchParams.get('category');
   const search = searchParams.get('search');
   const featured = searchParams.get('featured');
+
+  // Fast check: If MySQL is offline, return fallback instantly without 4.5s timeout
+  const dbUp = await isDatabaseAvailable();
+  if (!dbUp) {
+    if (slug) {
+      const fallbackGame = GAMES.find((g) => g.slug === slug);
+      return NextResponse.json({
+        success: Boolean(fallbackGame),
+        game: fallbackGame || null,
+        source: 'static_offline'
+      });
+    }
+
+    let filtered = GAMES;
+    if (categoryId && categoryId !== 'all') {
+      if (categoryId === 'hot') filtered = filtered.filter((g) => g.isHot);
+      else if (categoryId === 'new') filtered = filtered.filter((g) => g.isNew);
+      else filtered = filtered.filter((g) => g.categoryId === categoryId);
+    }
+    if (featured === 'true') {
+      filtered = filtered.filter((g) => g.isFeatured);
+    }
+    if (search) {
+      const q = search.toLowerCase().trim();
+      filtered = filtered.filter(
+        (g) =>
+          g.title.toLowerCase().includes(q) ||
+          g.category.toLowerCase().includes(q) ||
+          g.tags.some((t) => t.toLowerCase().includes(q))
+      );
+    }
+
+    return NextResponse.json({
+      success: true,
+      source: 'static_offline',
+      count: filtered.length,
+      games: filtered
+    });
+  }
 
   try {
     if (slug) {

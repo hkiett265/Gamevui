@@ -1,9 +1,18 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { prisma, isDatabaseAvailable } from '@/lib/prisma';
 import { HERO_SLIDES } from '@/data/games';
 import { HeroSlide } from '@/types/game';
 
 export async function GET() {
+  const dbUp = await isDatabaseAvailable();
+  if (!dbUp) {
+    return NextResponse.json({
+      success: true,
+      source: 'static_offline',
+      slides: HERO_SLIDES
+    });
+  }
+
   try {
     const dbSlides = await prisma.heroSlide.findMany({
       where: { isActive: true },
