@@ -6,7 +6,10 @@ import { RotateCcw, Home, Trophy, Target, Award, Zap, Crosshair } from 'lucide-r
 import confetti from 'canvas-confetti';
 import { soundSystem } from '@/audio/soundSystem';
 
+import { useAuthStore } from '@/stores/useAuthStore';
+
 export const GameOverModal: React.FC = () => {
+  const user = useAuthStore((s) => s.user);
   const {
     gameState,
     score,
@@ -20,7 +23,7 @@ export const GameOverModal: React.FC = () => {
     resetGame
   } = useGameStore();
 
-  const [playerName, setPlayerName] = React.useState('Xạ Thủ Hồ Kiệt');
+  const [playerName, setPlayerName] = React.useState(user?.username || 'Xạ Thủ Hồ Kiệt');
   const [saveStatus, setSaveStatus] = React.useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
   const isNewHighScore = score > 0 && score >= highScore;
   const accuracy = shotsFired > 0 ? Math.round((chickensHit / shotsFired) * 100) : 0;

@@ -1,12 +1,14 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Search, Home, Flame, Sparkles, Heart, Sun, Moon, Gamepad2, X } from 'lucide-react';
+import { Search, Home, Flame, Sparkles, Heart, Sun, Moon, Gamepad2, X, LogOut, User as UserIcon } from 'lucide-react';
 import { PortalTab } from '@/types/game';
 import { useTheme } from '@/hooks/useTheme';
 import { useGameSearch } from '@/hooks/useGameSearch';
+import { useAuthStore } from '@/stores/useAuthStore';
+import { AuthModal } from './AuthModal';
 
 interface HeaderProps {
   activeTab?: PortalTab;
@@ -20,6 +22,13 @@ export const Header: React.FC<HeaderProps> = ({
   favoritesCount = 0
 }) => {
   const { toggleTheme } = useTheme();
+  const { user, openLoginModal, openRegisterModal, logout, checkAuth } = useAuthStore();
+  const [showUserDropdown, setShowUserDropdown] = useState(false);
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
   const {
     searchQuery,
     setSearchQuery,
@@ -183,20 +192,123 @@ export const Header: React.FC<HeaderProps> = ({
             <div className="theme-thumb" />
           </div>
 
-          <button
-            className="btn-login"
-            onClick={() => alert('Chức năng Đăng nhập cho thành viên GameVui 24h')}
-          >
-            Đăng nhập
-          </button>
-          <button
-            className="btn-register"
-            onClick={() => alert('Đăng ký tài khoản miễn phí tại Hồ Kiệt GameVui 24h')}
-          >
-            Đăng ký
-          </button>
+          {user ? (
+            /* Logged in User Profile Pill & Dropdown */
+            <div style={{ position: 'relative' }}>
+              <div
+                onClick={() => setShowUserDropdown(!showUserDropdown)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  padding: '5px 12px 5px 6px',
+                  borderRadius: 9999,
+                  background: 'rgba(56, 189, 248, 0.12)',
+                  border: '1px solid rgba(56, 189, 248, 0.4)',
+                  cursor: 'pointer',
+                  boxShadow: '0 0 12px rgba(56, 189, 248, 0.2)'
+                }}
+                title="Tài khoản cá nhân"
+              >
+                <div
+                  style={{
+                    width: 32,
+                    height: 32,
+                    borderRadius: 9999,
+                    overflow: 'hidden',
+                    background: '#0284c7',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                >
+                  {user.avatar ? (
+                    <img src={user.avatar} alt={user.username} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  ) : (
+                    <UserIcon size={18} color="#ffffff" />
+                  )}
+                </div>
+                <span style={{ fontSize: '13px', fontWeight: 800, color: '#ffffff' }}>
+                  {user.username}
+                </span>
+              </div>
+
+              {/* User Dropdown */}
+              {showUserDropdown && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    right: 0,
+                    top: '120%',
+                    width: 190,
+                    background: '#0f172a',
+                    border: '1px solid rgba(255,255,255,0.15)',
+                    borderRadius: 14,
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.6)',
+                    padding: 8,
+                    zIndex: 50,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 4
+                  }}
+                >
+                  <div style={{ padding: '8px 10px', fontSize: '11px', color: '#94a3b8', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                    <div>Tài khoản: <strong style={{ color: '#38bdf8' }}>{user.username}</strong></div>
+                    {user.email && (
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', marginTop: 2 }}>
+                        {user.email}
+                      </div>
+                    )}
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      logout();
+                      setShowUserDropdown(false);
+                    }}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 8,
+                      padding: '8px 10px',
+                      borderRadius: 8,
+                      background: 'transparent',
+                      border: 'none',
+                      color: '#f87171',
+                      fontSize: '13px',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      textAlign: 'left'
+                    }}
+                  >
+                    <LogOut size={16} />
+                    <span>Đăng xuất</span>
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            /* Logged out Action Buttons */
+            <>
+              <button
+                className="btn-login"
+                onClick={openLoginModal}
+              >
+                Đăng nhập
+              </button>
+              <button
+                className="btn-register"
+                onClick={openRegisterModal}
+              >
+                Đăng ký
+              </button>
+            </>
+          )}
         </div>
       </div>
+
+      {/* Global Auth Modal */}
+      <AuthModal />
     </header>
   );
 };
