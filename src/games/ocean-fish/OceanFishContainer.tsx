@@ -1,12 +1,12 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import { OceanEngine } from '@/games/ocean-fish/OceanEngine';
+import { OceanEngine } from '@/games/ocean-fish/engine/OceanEngine';
 import { useOceanFishStore } from '@/games/ocean-fish/store';
-import { OceanHUD } from './OceanHUD';
-import { OceanMainMenu } from './OceanMainMenu';
-import { OceanPauseModal } from './OceanPauseModal';
-import { OceanGameOverModal } from './OceanGameOverModal';
+import { OceanHUD } from './ui/OceanHUD';
+import { OceanMainMenu } from './ui/OceanMainMenu';
+import { OceanPauseModal } from './ui/OceanPauseModal';
+import { OceanGameOverModal } from './ui/OceanGameOverModal';
 
 export const OceanFishContainer: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);

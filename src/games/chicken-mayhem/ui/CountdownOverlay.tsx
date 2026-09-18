@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useGameStore } from '@/games/chicken-mayhem/store';
-import { soundSystem } from '@/games/chicken-mayhem/soundSystem';
+import { soundSystem } from '@/games/chicken-mayhem/audio/soundSystem';
 
 export const CountdownOverlay: React.FC = () => {
   const { gameState, startGame } = useGameStore();

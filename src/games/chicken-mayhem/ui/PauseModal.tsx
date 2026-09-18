@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import { useGameStore } from '@/games/chicken-mayhem/store';
 import { Play, RotateCcw, Home, Volume2, VolumeX } from 'lucide-react';
-import { soundSystem } from '@/games/chicken-mayhem/soundSystem';
+import { soundSystem } from '@/games/chicken-mayhem/audio/soundSystem';
 
 export const PauseModal: React.FC = () => {
   const {

@@ -5,12 +5,12 @@ import dynamic from 'next/dynamic';
 import { JetJetHUD } from './ui/JetJetHUD';
 import { MainMenu } from './ui/MainMenu';
 import { TransformationBanner } from './ui/TransformationBanner';
-import { jetJetAudio } from './audio/jetJetAudio';
+import { jetJetAudio } from './engine/audio/jetJetAudio';
 import { useJetJetStore } from '@/games/jetjet/store';
 
 // Dynamically import Canvas with SSR disabled
 const JetJetCanvas = dynamic(
-  () => import('./JetJetCanvas').then((mod) => mod.JetJetCanvas),
+  () => import('./engine/JetJetCanvas').then((mod) => mod.JetJetCanvas),
   {
     ssr: false,
     loading: () => (

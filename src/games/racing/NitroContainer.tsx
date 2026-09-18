@@ -5,12 +5,12 @@ import dynamic from 'next/dynamic';
 import { RacingHUD } from './ui/RacingHUD';
 import { RacingMainMenu } from './ui/RacingMainMenu';
 import { RacingGameOverModal } from './ui/RacingGameOverModal';
-import { nitroAudio } from './audio/nitroAudio';
+import { nitroAudio } from './engine/audio/nitroAudio';
 import { useNitroRacerStore } from '@/games/racing/store';
 
 // Dynamically import Canvas with SSR disabled
 const NitroCanvas = dynamic(
-  () => import('./NitroCanvas').then((mod) => mod.NitroCanvas),
+  () => import('./engine/NitroCanvas').then((mod) => mod.NitroCanvas),
   {
     ssr: false,
     loading: () => (

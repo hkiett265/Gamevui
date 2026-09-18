@@ -1,6 +1,6 @@
 import { FishEntity, FISH_DEFINITIONS } from './fishTypes';
 import { CANNON_CONFIGS, useOceanFishStore } from '@/games/ocean-fish/store';
-import { oceanSoundSystem } from '@/games/ocean-fish/oceanSoundSystem';
+import { oceanSoundSystem } from '@/games/ocean-fish/audio/oceanSoundSystem';
 
 export interface Bullet {
   id: string;

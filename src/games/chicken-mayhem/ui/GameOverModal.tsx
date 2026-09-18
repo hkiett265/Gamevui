@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { useGameStore } from '@/games/chicken-mayhem/store';
 import { RotateCcw, Home, Trophy, Target, Award, Zap, Crosshair } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { soundSystem } from '@/games/chicken-mayhem/soundSystem';
+import { soundSystem } from '@/games/chicken-mayhem/audio/soundSystem';
 
 import { useAuthStore } from '@/stores/useAuthStore';
 

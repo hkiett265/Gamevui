@@ -3,7 +3,7 @@
 import React from 'react';
 import { Play } from 'lucide-react';
 import { useNitroRacerStore } from '@/games/racing/store';
-import { nitroAudio } from '../audio/nitroAudio';
+import { nitroAudio } from '../engine/audio/nitroAudio';
 
 export const RacingMainMenu: React.FC = () => {
   const store = useNitroRacerStore();

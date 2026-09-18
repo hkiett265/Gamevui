@@ -3,7 +3,7 @@
 import React from 'react';
 import { useJetJetStore } from '@/games/jetjet/store';
 import { Volume2, VolumeX, X, Sliders } from 'lucide-react';
-import { jetJetAudio } from '../audio/jetJetAudio';
+import { jetJetAudio } from '../engine/audio/jetJetAudio';
 
 export const SettingsModal: React.FC = () => {
   const {

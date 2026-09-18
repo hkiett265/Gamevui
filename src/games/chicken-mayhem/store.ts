@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { soundSystem } from '@/games/chicken-mayhem/soundSystem';
+import { soundSystem } from '@/games/chicken-mayhem/audio/soundSystem';
 
 export type GameState = 'MENU' | 'COUNTDOWN' | 'PLAYING' | 'PAUSED' | 'GAME_OVER';
 

@@ -7,7 +7,7 @@ import { Speedometer } from './Speedometer';
 import { ChaseHUD } from './ChaseHUD';
 import { SettingsModal } from './SettingsModal';
 import { Volume2, VolumeX, ArrowLeft, Navigation, Flag, Settings as SettingsIcon } from 'lucide-react';
-import { jetJetAudio } from '../audio/jetJetAudio';
+import { jetJetAudio } from '../engine/audio/jetJetAudio';
 
 export const JetJetHUD: React.FC = () => {
   const {

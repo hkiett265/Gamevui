@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 import { PlayPageShell } from '@/components/play/PlayPageShell';
 import { useGameStore } from '@/games/chicken-mayhem/store';
-import { soundSystem } from '@/games/chicken-mayhem/soundSystem';
+import { soundSystem } from '@/games/chicken-mayhem/audio/soundSystem';
 
 const ChickenMayhemContainer = dynamic(
   () => import('@/games/chicken-mayhem/GameContainer').then((mod) => mod.GameContainer),

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useJetJetStore } from '@/games/jetjet/store';
 import { Play, HelpCircle, Volume2, VolumeX, ArrowLeft } from 'lucide-react';
-import { jetJetAudio } from '../audio/jetJetAudio';
+import { jetJetAudio } from '../engine/audio/jetJetAudio';
 
 export const MainMenu: React.FC = () => {
   const { gameState, startGame, isMuted, toggleMute } = useJetJetStore();

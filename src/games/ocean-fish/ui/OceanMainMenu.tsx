@@ -3,7 +3,7 @@
 import React from 'react';
 import { useOceanFishStore } from '@/games/ocean-fish/store';
 import { Play, Trophy, Volume2, VolumeX, Sparkles, ShieldAlert, Award } from 'lucide-react';
-import { FISH_DEFINITIONS } from '@/games/ocean-fish/fishTypes';
+import { FISH_DEFINITIONS } from '@/games/ocean-fish/engine/fishTypes';
 
 export const OceanMainMenu: React.FC = () => {
   const { gameState, startGame, highScore, isMuted, toggleSound } = useOceanFishStore();
