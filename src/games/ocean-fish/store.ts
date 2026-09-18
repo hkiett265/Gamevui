@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { oceanSoundSystem } from '@/games/ocean-fish/oceanSoundSystem';
+import { oceanSoundSystem } from '@/games/ocean-fish/audio/oceanSoundSystem';
 
 export type OceanGameState = 'MENU' | 'PLAYING' | 'PAUSED' | 'GAME_OVER';
 

@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { useGameStore } from '@/games/chicken-mayhem/store';
-import { Crosshair } from './Crosshair';
+import { Crosshair } from './engine/Crosshair';
 import { HUD } from './ui/HUD';
 import { MainMenu } from './ui/MainMenu';
 import { CountdownOverlay } from './ui/CountdownOverlay';
@@ -13,7 +13,7 @@ import { GameOverModal } from './ui/GameOverModal';
 
 // Dynamically import GameCanvas with SSR disabled to prevent hydration errors and WebGL context issues
 const GameCanvas = dynamic(
-  () => import('./GameCanvas').then((mod) => mod.GameCanvas),
+  () => import('./engine/GameCanvas').then((mod) => mod.GameCanvas),
   {
     ssr: false,
     loading: () => (

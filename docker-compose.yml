@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: gamevui_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: gamevui24h
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "3308:3306"
+    volumes:
+      - gamevui_db_data:/var/lib/mysql
+
+  app:
+    build: .
+    container_name: gamevui_app
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=mysql://root:@db:3306/gamevui24h
+    depends_on:
+      - db
+
+volumes:
+  gamevui_db_data:

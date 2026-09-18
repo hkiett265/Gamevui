@@ -60,6 +60,7 @@ export const LeftSidebar: React.FC<LeftSidebarProps> = ({
 
   return (
     <aside className="portal-left-sidebar">
+      <div className="sidebar-section-title">Danh mục</div>
       <ul className="sidebar-category-list">
         {categories.map((cat: any) => {
           const isActive = selectedCategoryId === cat.id;

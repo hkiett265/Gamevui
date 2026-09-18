@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useGameStore } from '@/games/chicken-mayhem/store';
 import { Volume2, VolumeX, Play, HelpCircle, Trophy, Crosshair } from 'lucide-react';
-import { soundSystem } from '@/games/chicken-mayhem/soundSystem';
+import { soundSystem } from '@/games/chicken-mayhem/audio/soundSystem';
 
 export const MainMenu: React.FC = () => {
   const { gameState, startCountdown, highScore, isMuted, toggleSound } = useGameStore();

@@ -3,7 +3,7 @@
 import React from 'react';
 import { useJetJetStore } from '@/games/jetjet/store';
 import { Sparkles, Zap, Trophy, Play } from 'lucide-react';
-import { jetJetAudio } from '../audio/jetJetAudio';
+import { jetJetAudio } from '../engine/audio/jetJetAudio';
 
 export const TransformationBanner: React.FC = () => {
   const { gameState, missionStep, startMission02, finishChaseSuccess } = useJetJetStore();
